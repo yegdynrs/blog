@@ -1,6 +1,7 @@
 ---
 title: 淘宝-商家装修-banner图
 tags: [taobao, 商家装修]
+categories: [淘宝]
 date: 2021-03-17 14:09:01
 ---
 

@@ -97,6 +97,8 @@ postTitleTop:
 inputEffects:
   on: true
 
+
+# 动画
 # live-2d(左下角动画人物)
 live2d:
   on: true # 控制显示或者隐藏
@@ -110,7 +112,7 @@ snow:
 
 # 首页花瓣飘落效果--春天
 sakura:
-  on: true
+  on: false
   onlyPc: false # 设为true，只有pc端显示花瓣特效
 
 # 首页文章图片是否一左一右交错显示
@@ -176,9 +178,9 @@ music:
 # 关于我
 baseInfo:
   on: true
-  age: 99 # 年龄
+  age: 25 # 年龄
   sex: '男' # 性别
-  coordinate: '火星' # 坐标
+  coordinate: '重庆' # 坐标
   status: '划水中' # 状态
 
 # 关于我 技能
@@ -187,10 +189,10 @@ skills: # color or #000 技能
   data:
     HTML5:
       background: 'linear-gradient(45deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%)'
-      percent: 90%
+      percent: 70%
     JavaScript:
       background: 'linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%)'
-      percent: 85%
+      percent: 75%
     Node.js:
       background: 'linear-gradient(to right, #43e97b 0%, #38f9d7 100%)'
       percent: 50%
@@ -199,7 +201,7 @@ skills: # color or #000 技能
       percent: 70%
     Vue:
       background: 'linear-gradient(to top, #0ba360 0%, #3cba92 100%)'
-      percent: 90%
+      percent: 85%
     uni-app:
       background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
       percent: 75%
@@ -243,8 +245,6 @@ games:
 books:
   on: true
   data:
-    明朝那些事儿:
-      img: 'https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=2736238052,2078148140&fm=26&gp=0.jpg'
     春秋左传:
       img: 'https://pic2.zhimg.com/50/v2-6f33f60312de25ddcb795fc81ee91b38_720w.jpg?source=54b3c3a5'
     孙子兵法:
@@ -252,7 +252,7 @@ books:
 
 #版权信息  coryRyght
 copyright:
-  on: true
+  on: false
 
 # 文章置顶
 topArticle:
