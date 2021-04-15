@@ -13,7 +13,7 @@ timezone: 'Asia/Shanghai'
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
-url: https://yegdynrs.github.io/project
+url: https://yegdynrs.github.io/blog
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 pretty_urls:
@@ -21,11 +21,11 @@ pretty_urls:
   trailing_html: true # Set to false to remove trailing '.html' from permalinks
 
 prism_plugin:
-  mode: 'preprocess'    # realtime/preprocess
-  theme: 'tomorrow'    # 这里可以选择不同样式的主题
-  line_number: false    # default false
+  mode: 'preprocess' # realtime/preprocess
+  theme: 'tomorrow' # 这里可以选择不同样式的主题
+  line_number: false # default false
   custom_css:
-  
+
 # Directory
 
 # 资源文件夹，这个文件夹用来存放内容。
