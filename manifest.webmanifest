@@ -4,8 +4,8 @@
   "display": "fullscreen",
   "icons": [
     {
-      "src": "./medias/logo.png",
-      "sizes": "108x155",
+      "src": "./medias/fox-icon.png",
+      "sizes": "192x192",
       "type": "image/png"
     }
   ],
