@@ -1,0 +1,15 @@
+{
+  "background_color": "purple",
+  "description": "Shows random fox pictures. Hey, at least it isn't cats.",
+  "display": "fullscreen",
+  "icons": [
+    {
+      "src": "./medias/logo.png",
+      "sizes": "108x155",
+      "type": "image/png"
+    }
+  ],
+  "name": "yegdynrs blog",
+  "short_name": "yegdynrs",
+  "start_url": "./index.html"
+}
