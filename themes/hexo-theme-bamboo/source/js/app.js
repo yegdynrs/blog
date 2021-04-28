@@ -17,8 +17,9 @@ $(function() {
 })
 
 if ('serviceWorker' in navigator) {
-  navigator.serviceWorker
-    .register('./worker.js')
+    navigator.serviceWorker
+      
+    .register("<%- url_for('/js/worker.js') %>")
     .then(() => { console.log('Service Worker Registered'); });
 }
 
