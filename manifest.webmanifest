@@ -1,15 +1,20 @@
 {
   "background_color": "purple",
-  "description": "Shows random fox pictures. Hey, at least it isn't cats.",
+  "description": "yegdynrs_blog demo description",
   "display": "fullscreen",
   "icons": [
     {
       "src": "./medias/fox-icon.png",
       "sizes": "192x192",
       "type": "image/png"
+    },
+    {
+      "src": "./medias/fox-icon1.png",
+      "sizes": "512x512",
+      "type": "image/png"
     }
   ],
-  "name": "yegdynrs blog",
-  "short_name": "yegdynrs",
-  "start_url": "./index.html"
+  "name": "yegdynrs_blog2",
+  "short_name": "yegdynrs2",
+  "start_url": "/blog/index.html"
 }

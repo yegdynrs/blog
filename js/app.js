@@ -16,18 +16,6 @@ $(function() {
     setTabs();
 })
 
-if ('serviceWorker' in navigator) {
-    navigator.serviceWorker
-    .register("./js/worker.js")
-    .then(() => { console.log('Service Worker Registered'); });
-}
-
-// Code to handle install prompt on desktop
-
-let deferredPrompt;
-const addBtn = document.querySelector('.add-button');
-addBtn.style.display = 'none';
-
 window.addEventListener('beforeinstallprompt', (e) => {
     console.log('beforeinstallprompt');
   // Prevent Chrome 67 and earlier from automatically showing the prompt
@@ -53,3 +41,15 @@ window.addEventListener('beforeinstallprompt', (e) => {
     });
   });
 });
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker
+    .register("./js/worker.js")
+    .then(() => { console.log('Service Worker Registered'); });
+}
+
+// Code to handle install prompt on desktop
+
+let deferredPrompt;
+const addBtn = document.querySelector('.add-button');
+addBtn.style.display = 'none';
+
