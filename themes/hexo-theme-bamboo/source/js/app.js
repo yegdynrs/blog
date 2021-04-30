@@ -43,7 +43,7 @@ window.addEventListener('beforeinstallprompt', (e) => {
 });
 if ('serviceWorker' in navigator) {
     navigator.serviceWorker
-    .register("./js/worker.js")
+    .register("./worker.js")
     .then(() => { console.log('Service Worker Registered'); });
 }
 
