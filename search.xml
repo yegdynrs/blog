@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>添加到主屏幕</title>
+      <link href="/blog/2021/05/11/%E6%B7%BB%E5%8A%A0%E5%88%B0%E4%B8%BB%E5%B1%8F%E5%B9%95/"/>
+      <url>/blog/2021/05/11/%E6%B7%BB%E5%8A%A0%E5%88%B0%E4%B8%BB%E5%B1%8F%E5%B9%95/</url>
+      
+        <content type="html"><![CDATA[<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>添加到主屏幕，简称 A2HS</p><h3 id="pc-端表现"><a href="#pc-端表现" class="headerlink" title="pc 端表现"></a>pc 端表现</h3><p>在 pc 端中，将会在地址栏出现下载，用户点击后，将会在用户的桌面创建一个类似应用的快捷方式的一个 logo，用户点击这个应用后，将会以一个隐藏了浏览器界面，输入框的方式直接打开该应用。<br><img src=/blog/static/img/screenWap.jpg /></p><h3 id="手机端显示"><a href="#手机端显示" class="headerlink" title="手机端显示"></a>手机端显示</h3><p>在手机端，打开网址，将会自动弹出，询问用户是否添加该应用的消息窗，添加后将会在手机桌面创建快捷方式<br><img src=/blog/static/img/screenMobil.jpg /></p><h2 id="前提条件"><a href="#前提条件" class="headerlink" title="前提条件"></a>前提条件</h2><p>0、html，manifest.webmanifest，Worker 文件最好放在同一级</p><p>1、HTTPS 提供服务——Web</p><p>2、从 HTML 头链接具有正确字段的 <a href="https://w3c.github.io/manifest/#media-type-registration" target="_blank">manifest</a> 文件。</p><p>A2HS 所需的字段如下：</p><ul><li><p>background_color：指定在某些应用程序上下文中使用的背景色。与 A2HS 最相关的一个是在点击主屏幕上的应用程序图标并首次开始加载时显示的初始屏幕（目前仅在通过 Chrome 将应用添加到主屏幕时显示）。</p></li><li><p>display：指定应如何显示应用。 为了使它看起来像一个应用程序而非网页，这里应该填写像是 fullscreen （根本不显示任何 UI）或 standalone（与前者非常相似，但是状态栏这样的系统级 UI 元素可能是可见的）的值。</p></li><li><p>icons：指定在不同位置（例如，在任务切换器上或更重要的是在主屏幕上）表示应用程序时浏览器使用的图标。 我们的演示中仅包含一个。</p></li><li><p>name/short_name：这些字段提供了在不同位置表示应用程序时要显示的应用程序名称。name 提供完整的应用名称。short_name 则是当没有足够的空间显示全名时，提供的缩写名称。如果您的应用程序名称特别长，建议您同时提供两者。</p></li><li><p>start_url：提供启动添加到主屏幕应用程序时应加载的资源的路径。请注意，这必须是一个相对 manifest 指向网站主页的相对路径。另请注意，Chrome 需要这条字段才能显示安装标语，而 Firefox 即使没有这条字段也会显示用于添加到主屏的含加号的主页图标。</p></li></ul><p>3、合适的图标</p><p>4、Chrome 浏览器还要求该应用程序注册一个 Service Worker（这样在离线状态下就也可以运行）。</p><h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><p>1、创建 manifest.webmanifest 文件</p><pre class=" language-text"><code class="language-text">&#123;"background_color": "purple","description": "Shows random fox pictures. Hey, at least it isn't cats.","display": "fullscreen","icons": [    &#123;    "src": "icon/fox-icon.png",    "sizes": "192x192",    "type": "image/png"    &#125;],"name": "Awesome fox pictures","short_name": "Foxes","start_url": "/pwa-examples/a2hs/index.html"&#125;</code></pre><p>2、创建 html 文件</p><pre class=" language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>link</span> <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>manifest<span class="token punctuation">"</span></span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>manifest.webmanifest<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>add-button<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Add to home screen<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span></code></pre><pre class=" language-text"><code class="language-text">.add-button &#123;  position: absolute;  top: 1px;  left: 1px;&#125;</code></pre><pre class=" language-text"><code class="language-text">let deferredPrompt;const addBtn = document.querySelector('.add-button');addBtn.style.display = 'none';window.addEventListener('beforeinstallprompt', (e) => &#123;  // 防止 Chrome 67 及更早版本自动显示安装提示  e.preventDefault();  // 稍后再触发此事件  deferredPrompt = e;  // 更新 UI 以提醒用户可以将 App 安装到桌面  addBtn.style.display = 'block';  addBtn.addEventListener('click', (e) => &#123;    // 隐藏显示 A2HS 按钮的界面    addBtn.style.display = 'none';    // 显示安装提示    deferredPrompt.prompt();    // 等待用户反馈    deferredPrompt.userChoice.then((choiceResult) => &#123;      if (choiceResult.outcome === 'accepted') &#123;        console.log('User accepted the A2HS prompt');      &#125; else &#123;        console.log('User dismissed the A2HS prompt');      &#125;      deferredPrompt = null;    &#125;);  &#125;);&#125;);</code></pre><p>3、创建 worker 文件</p><pre class=" language-text"><code class="language-text">self.addEventListener('install', (e) => &#123;&#125;);self.addEventListener('fetch', (e) => &#123;  console.log(e.request.url);&#125;);</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 新技术 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> js </tag>
+            
+            <tag> 渐进式Web应用程序 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Delete `␍`eslint(prettier/prettier) 错误的解决方案</title>
       <link href="/blog/2021/04/13/eslint%E6%8D%A2%E8%A1%8C%E9%94%99%E8%AF%AF/"/>
       <url>/blog/2021/04/13/eslint%E6%8D%A2%E8%A1%8C%E9%94%99%E8%AF%AF/</url>
